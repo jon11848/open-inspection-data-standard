@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+title: Open Inspection Data Standard
+message: Please cite the specific released version used by your implementation.
+type: software
+version: 0.1.0
+date-released: 2026-07-30
+license: Apache-2.0
+abstract: Vendor-neutral canonical data model and interoperability protocol for inspections of buildings and other constructed assets.
