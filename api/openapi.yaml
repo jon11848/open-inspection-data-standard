@@ -1,0 +1,457 @@
+openapi: 3.1.1
+info:
+  title: Open Inspection Data Standard API
+  version: 0.1.0
+  summary: Standard vendor-to-vendor API behaviors for inspection data.
+  description: >-
+    This working draft defines interoperable behaviors and capability discovery.
+    Implementations may expose additional endpoints and may support only the
+    capabilities they declare.
+  license:
+    name: Apache-2.0
+    identifier: Apache-2.0
+servers:
+  - url: https://api.example.com/oids/v0.1
+    description: Illustrative server; replace in an implementation.
+security:
+  - oauth2: [oids.read]
+  - bearerAuth: []
+paths:
+  /capabilities:
+    get:
+      operationId: getCapabilities
+      summary: Retrieve supported versions, profiles, resources, and operations.
+      security: []
+      responses:
+        '200':
+          description: Capability document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Capabilities'
+  /assets:
+    get:
+      operationId: listAssets
+      summary: List assets visible to the caller.
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/UpdatedSince'
+      responses:
+        '200': {$ref: '#/components/responses/AssetPage'}
+    post:
+      operationId: createAsset
+      summary: Create or import an asset.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/asset.schema.json'}
+      responses:
+        '201': {$ref: '#/components/responses/AssetItem'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /assets/{id}:
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
+    get:
+      operationId: getAsset
+      responses:
+        '200': {$ref: '#/components/responses/AssetItem'}
+        '404': {$ref: '#/components/responses/NotFound'}
+    patch:
+      operationId: updateAsset
+      parameters:
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema: {type: object}
+      responses:
+        '200': {$ref: '#/components/responses/AssetItem'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /inspection-events:
+    get:
+      operationId: listInspectionEvents
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - name: assetId
+          in: query
+          schema: {type: string}
+      responses:
+        '200':
+          description: Inspection event page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InspectionEventPage'
+    post:
+      operationId: createInspectionEvent
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/inspection-event.schema.json'}
+      responses:
+        '201':
+          description: Created inspection event
+          headers:
+            ETag: {$ref: '#/components/headers/ETag'}
+          content:
+            application/json:
+              schema: {$ref: '../schemas/inspection-event.schema.json'}
+  /observations:
+    get:
+      operationId: listObservations
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - name: inspectionEventId
+          in: query
+          schema: {type: string}
+      responses:
+        '200':
+          description: Observation page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservationPage'
+    post:
+      operationId: createObservation
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/observation.schema.json'}
+      responses:
+        '201':
+          description: Created observation
+          content:
+            application/json:
+              schema: {$ref: '../schemas/observation.schema.json'}
+  /findings:
+    get:
+      operationId: listFindings
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - name: inspectionEventId
+          in: query
+          schema: {type: string}
+      responses:
+        '200':
+          description: Finding page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindingPage'
+    post:
+      operationId: createFinding
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/finding.schema.json'}
+      responses:
+        '201':
+          description: Created finding
+          content:
+            application/json:
+              schema: {$ref: '../schemas/finding.schema.json'}
+  /issues:
+    get:
+      operationId: listIssues
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - name: inspectionEventId
+          in: query
+          schema: {type: string}
+      responses:
+        '200':
+          description: Issue page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssuePage'
+    post:
+      operationId: createIssue
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/issue.schema.json'}
+      responses:
+        '201':
+          description: Created issue
+          content:
+            application/json:
+              schema: {$ref: '../schemas/issue.schema.json'}
+  /issues/{id}/status:
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
+    post:
+      operationId: changeIssueStatus
+      summary: Apply a declared issue-status transition.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status: {$ref: '../schemas/common.schema.json#/$defs/VocabularyTerm'}
+                comment: {type: string}
+                actor: {$ref: '../schemas/common.schema.json#/$defs/ActorReference'}
+              required: [status, actor]
+              additionalProperties: false
+      responses:
+        '200':
+          description: Updated issue
+          content:
+            application/json:
+              schema: {$ref: '../schemas/issue.schema.json'}
+  /evidence:
+    post:
+      operationId: registerEvidence
+      summary: Register evidence metadata or initiate a supported upload flow.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/evidence.schema.json'}
+      responses:
+        '201':
+          description: Registered evidence
+          content:
+            application/json:
+              schema: {$ref: '../schemas/evidence.schema.json'}
+  /changes:
+    get:
+      operationId: getChanges
+      summary: Retrieve entities changed after a cursor or timestamp.
+      parameters:
+        - name: cursor
+          in: query
+          schema: {type: string}
+        - $ref: '#/components/parameters/UpdatedSince'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Change page
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChangePage'}
+  /exports:
+    post:
+      operationId: requestExport
+      summary: Request an OIDS exchange package.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assetIds: {type: array, items: {type: string}}
+                inspectionEventIds: {type: array, items: {type: string}}
+                profileIds: {type: array, items: {type: string}}
+                includeEvidence: {type: boolean, default: false}
+              additionalProperties: false
+      responses:
+        '202':
+          description: Export accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Job'}
+  /imports:
+    post:
+      operationId: importPackage
+      summary: Import and validate an OIDS exchange package.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/package.schema.json'}
+      responses:
+        '202':
+          description: Import accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Job'}
+        '422': {$ref: '#/components/responses/ValidationError'}
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.example.com/oauth/token
+          scopes:
+            oids.read: Read inspection data
+            oids.write: Write inspection data
+    bearerAuth:
+      type: http
+      scheme: bearer
+  parameters:
+    EntityId:
+      name: id
+      in: path
+      required: true
+      schema: {type: string}
+    Cursor:
+      name: cursor
+      in: query
+      schema: {type: string}
+    Limit:
+      name: limit
+      in: query
+      schema: {type: integer, minimum: 1, maximum: 1000, default: 100}
+    UpdatedSince:
+      name: updatedSince
+      in: query
+      schema: {type: string, format: date-time}
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema: {type: string, minLength: 8}
+    IfMatch:
+      name: If-Match
+      in: header
+      required: false
+      schema: {type: string}
+  headers:
+    ETag:
+      schema: {type: string}
+  schemas:
+    Capabilities:
+      type: object
+      properties:
+        standardVersions: {type: array, items: {type: string}}
+        profileIds: {type: array, items: {type: string}}
+        resources:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              read: {type: boolean}
+              write: {type: boolean}
+              patch: {type: boolean}
+              events: {type: boolean}
+            additionalProperties: false
+        packageImport: {type: boolean}
+        packageExport: {type: boolean}
+        changeFeed: {type: boolean}
+      required: [standardVersions, resources]
+      additionalProperties: false
+    PageMetadata:
+      type: object
+      properties:
+        nextCursor: {type: [string, 'null']}
+        count: {type: integer, minimum: 0}
+      required: [count]
+      additionalProperties: false
+    AssetPage:
+      type: object
+      properties:
+        items: {type: array, items: {$ref: '../schemas/asset.schema.json'}}
+        page: {$ref: '#/components/schemas/PageMetadata'}
+      required: [items, page]
+    InspectionEventPage:
+      type: object
+      properties:
+        items: {type: array, items: {$ref: '../schemas/inspection-event.schema.json'}}
+        page: {$ref: '#/components/schemas/PageMetadata'}
+      required: [items, page]
+    ObservationPage:
+      type: object
+      properties:
+        items: {type: array, items: {$ref: '../schemas/observation.schema.json'}}
+        page: {$ref: '#/components/schemas/PageMetadata'}
+      required: [items, page]
+    FindingPage:
+      type: object
+      properties:
+        items: {type: array, items: {$ref: '../schemas/finding.schema.json'}}
+        page: {$ref: '#/components/schemas/PageMetadata'}
+      required: [items, page]
+    IssuePage:
+      type: object
+      properties:
+        items: {type: array, items: {$ref: '../schemas/issue.schema.json'}}
+        page: {$ref: '#/components/schemas/PageMetadata'}
+      required: [items, page]
+    ChangePage:
+      type: object
+      properties:
+        events: {type: array, items: {$ref: '../schemas/lifecycle-event.schema.json'}}
+        nextCursor: {type: [string, 'null']}
+      required: [events]
+    Job:
+      type: object
+      properties:
+        id: {type: string}
+        status: {enum: [accepted, running, succeeded, failed]}
+        resultUri: {type: string, format: uri-reference}
+        errors: {type: array, items: {$ref: '#/components/schemas/Error'}}
+      required: [id, status]
+    Error:
+      type: object
+      properties:
+        code: {type: string}
+        message: {type: string}
+        pointer: {type: string}
+        details: {type: object, additionalProperties: true}
+      required: [code, message]
+      additionalProperties: false
+  responses:
+    AssetPage:
+      description: Asset page
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/AssetPage'}
+    AssetItem:
+      description: Asset
+      headers:
+        ETag: {$ref: '#/components/headers/ETag'}
+      content:
+        application/json:
+          schema: {$ref: '../schemas/asset.schema.json'}
+    Conflict:
+      description: Identifier, idempotency, or concurrency conflict
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    ValidationError:
+      description: Package or semantic validation failed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors: {type: array, items: {$ref: '#/components/schemas/Error'}}
+            required: [errors]
