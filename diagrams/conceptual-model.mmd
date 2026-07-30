@@ -1,0 +1,15 @@
+flowchart TD
+    A[Asset] --> P[Inspection Program]
+    P --> E[Inspection Event]
+    E --> O[Observation]
+    O --> F[Finding]
+    F --> I[Issue]
+    V[Evidence] --> O
+    V --> F
+    V --> I
+    L[Location] --> O
+    L --> F
+    L --> I
+    R[Relationship] -. links .-> O
+    R -. links .-> F
+    R -. links .-> I

@@ -1,0 +1,29 @@
+{
+  "specversion": "1.0",
+  "id": "4b2e5fd5-cd59-497c-9b0b-1e61b1bf2b05",
+  "source": "https://api.example.com/oids",
+  "type": "org.openinspection.issue.status-changed.v1",
+  "subject": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e112",
+  "time": "2026-07-31T14:00:00Z",
+  "datacontenttype": "application/json",
+  "dataschema": "urn:oids:schema:lifecycle-event:0.1.0",
+  "data": {
+    "entity": {
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e112",
+      "type": "Issue"
+    },
+    "previousVersion": "3",
+    "currentVersion": "4",
+    "changedFields": [
+      "/status"
+    ],
+    "actor": {
+      "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e03",
+      "type": "Actor"
+    },
+    "details": {
+      "previousStatus": "open",
+      "currentStatus": "in-progress"
+    }
+  }
+}

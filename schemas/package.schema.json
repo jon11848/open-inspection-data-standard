@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:package:0.1.0",
+  "title": "OIDS Exchange Package",
+  "type": "object",
+  "properties": {
+    "manifest": {
+      "type": "object",
+      "properties": {
+        "packageId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "schemaVersion": {
+          "const": "0.1.0"
+        },
+        "createdAt": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+        },
+        "createdBy": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/ActorReference"
+        },
+        "sourceSystem": {
+          "type": "string"
+        },
+        "profileIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "changeCursor": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "packageId",
+        "schemaVersion",
+        "createdAt",
+        "createdBy",
+        "sourceSystem"
+      ],
+      "additionalProperties": false
+    },
+    "actors": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:actor:0.1.0"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:asset:0.1.0"
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:location:0.1.0"
+      }
+    },
+    "inspectionPrograms": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:inspection-program:0.1.0"
+      }
+    },
+    "inspectionEvents": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:inspection-event:0.1.0"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:evidence:0.1.0"
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:observation:0.1.0"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:finding:0.1.0"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:issue:0.1.0"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:relationship:0.1.0"
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:oids:schema:profile:0.1.0"
+      }
+    }
+  },
+  "required": [
+    "manifest"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:actor:0.1.0",
+  "title": "OIDS Actor",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Actor"
+        },
+        "actorType": {
+          "enum": [
+            "human",
+            "organization",
+            "regulator",
+            "software_system",
+            "ai_system",
+            "device",
+            "unknown"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "organizationId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "contact": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "phone": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "credentials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "credentialType": {
+                "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+              },
+              "identifier": {
+                "type": "string"
+              },
+              "issuer": {
+                "type": "string"
+              },
+              "jurisdiction": {
+                "type": "string"
+              },
+              "validFrom": {
+                "type": "string",
+                "format": "date"
+              },
+              "validUntil": {
+                "type": "string",
+                "format": "date"
+              }
+            },
+            "required": [
+              "credentialType",
+              "identifier"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "actorType",
+        "name"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

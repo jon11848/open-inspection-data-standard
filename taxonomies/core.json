@@ -1,0 +1,86 @@
+{
+  "id": "urn:oids:taxonomy:core:0.1.0",
+  "title": "OIDS Core Recommended Terms",
+  "version": "0.1.0",
+  "status": "draft",
+  "terms": [
+    {
+      "standardId": "urn:oids:term:relationship:supports",
+      "code": "supports",
+      "label": "Supports",
+      "description": "The source provides evidentiary or interpretive support for the target."
+    },
+    {
+      "standardId": "urn:oids:term:relationship:generates",
+      "code": "generates",
+      "label": "Generates",
+      "description": "The source gives rise to the target workflow item."
+    },
+    {
+      "standardId": "urn:oids:term:relationship:addresses",
+      "code": "addresses",
+      "label": "Addresses",
+      "description": "The source action or issue addresses the target."
+    },
+    {
+      "standardId": "urn:oids:term:review:unreviewed",
+      "code": "unreviewed",
+      "label": "Unreviewed"
+    },
+    {
+      "standardId": "urn:oids:term:review:human-reviewed",
+      "code": "human-reviewed",
+      "label": "Human reviewed"
+    },
+    {
+      "standardId": "urn:oids:term:review:professionally-verified",
+      "code": "professionally-verified",
+      "label": "Professionally verified"
+    },
+    {
+      "standardId": "urn:oids:term:review:rejected",
+      "code": "rejected",
+      "label": "Rejected"
+    },
+    {
+      "standardId": "urn:oids:term:issue-status:open",
+      "code": "open",
+      "label": "Open"
+    },
+    {
+      "standardId": "urn:oids:term:issue-status:in-progress",
+      "code": "in-progress",
+      "label": "In progress"
+    },
+    {
+      "standardId": "urn:oids:term:issue-status:ready-for-verification",
+      "code": "ready-for-verification",
+      "label": "Ready for verification"
+    },
+    {
+      "standardId": "urn:oids:term:issue-status:resolved",
+      "code": "resolved",
+      "label": "Resolved"
+    },
+    {
+      "standardId": "urn:oids:term:severity:physical-condition",
+      "code": "physical-condition",
+      "label": "Physical condition severity"
+    },
+    {
+      "standardId": "urn:oids:term:severity:safety-consequence",
+      "code": "safety-consequence",
+      "label": "Safety consequence"
+    },
+    {
+      "standardId": "urn:oids:term:severity:urgency",
+      "code": "urgency",
+      "label": "Urgency"
+    },
+    {
+      "standardId": "urn:oids:term:severity:extent",
+      "code": "extent",
+      "label": "Extent"
+    }
+  ]
+}

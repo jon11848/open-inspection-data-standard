@@ -1,0 +1,622 @@
+{
+  "manifest": {
+    "packageId": "urn:uuid:d850731a-c266-4114-a3ee-64c9c217a001",
+    "schemaVersion": "0.1.0",
+    "createdAt": "2026-07-30T18:30:00Z",
+    "createdBy": {
+      "id": "urn:oids:actor:founding-steward",
+      "type": "Actor"
+    },
+    "sourceSystem": "Example Inspection Platform 1.0",
+    "profileIds": [
+      "urn:oids:profile:facade-envelope:0.1.0"
+    ],
+    "description": "Synthetic facade inspection demonstrating nested observations, normalized plan and image coordinates, AI-authored findings, and a corrective issue."
+  },
+  "actors": [
+    {
+      "id": "urn:oids:actor:founding-steward",
+      "type": "Actor",
+      "schemaVersion": "0.1.0",
+      "title": "OIDS Founding Steward",
+      "createdAt": "2026-07-30T18:00:00Z",
+      "createdBy": {
+        "id": "urn:oids:actor:founding-steward",
+        "type": "Actor"
+      },
+      "actorType": "organization",
+      "name": "T2D2, Inc."
+    },
+    {
+      "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+      "type": "Actor",
+      "schemaVersion": "0.1.0",
+      "title": "Field Inspector",
+      "createdAt": "2026-07-30T14:00:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "actorType": "human",
+      "name": "Alex Inspector"
+    },
+    {
+      "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e02",
+      "type": "Actor",
+      "schemaVersion": "0.1.0",
+      "title": "Condition Detection Model",
+      "createdAt": "2026-07-30T14:00:00-04:00",
+      "createdBy": {
+        "id": "urn:oids:actor:founding-steward",
+        "type": "Actor"
+      },
+      "actorType": "ai_system",
+      "name": "Example Masonry Condition Model"
+    },
+    {
+      "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e03",
+      "type": "Actor",
+      "schemaVersion": "0.1.0",
+      "title": "Reviewing Engineer",
+      "createdAt": "2026-07-30T14:00:00-04:00",
+      "createdBy": {
+        "id": "urn:oids:actor:founding-steward",
+        "type": "Actor"
+      },
+      "actorType": "human",
+      "name": "Jordan Engineer"
+    }
+  ],
+  "assets": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e101",
+      "type": "Asset",
+      "title": "Example Historic Commercial Building",
+      "assetType": {
+        "standardId": "urn:oids:term:asset:building",
+        "code": "building",
+        "label": "Building"
+      },
+      "primaryLocationId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e102",
+      "locationIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e102"
+      ],
+      "externalIdentifiers": [
+        {
+          "system": "example-owner",
+          "value": "BLDG-001"
+        }
+      ],
+      "attributes": {
+        "yearBuilt": 1925,
+        "stories": 6
+      }
+    }
+  ],
+  "locations": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e102",
+      "type": "Location",
+      "title": "Building address",
+      "assetId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e101",
+      "locationType": {
+        "code": "address",
+        "label": "Address"
+      },
+      "address": {
+        "lines": [
+          "100 Example Street"
+        ],
+        "locality": "New York",
+        "region": "NY",
+        "postalCode": "10001",
+        "countryCode": "US"
+      },
+      "geographic": {
+        "type": "Point",
+        "coordinates": [
+          -73.99,
+          40.75
+        ],
+        "crs": "EPSG:4326"
+      }
+    },
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e103",
+      "type": "Location",
+      "title": "North elevation drawing annotation",
+      "assetId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e101",
+      "locationType": {
+        "code": "drawing-location",
+        "label": "Drawing location"
+      },
+      "assetPath": [
+        {
+          "kind": {
+            "code": "elevation",
+            "label": "Elevation"
+          },
+          "name": "North elevation"
+        },
+        {
+          "kind": {
+            "code": "level",
+            "label": "Level"
+          },
+          "name": "Level 4"
+        }
+      ],
+      "drawing": {
+        "documentId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e105",
+        "sheet": "A-201",
+        "revision": "2",
+        "sourceWidth": 2400,
+        "sourceHeight": 1800,
+        "sourceUnit": "pixel",
+        "coordinateOrigin": "top-left",
+        "geometry": {
+          "type": "Point",
+          "point": {
+            "x": 0.675,
+            "y": 0.42
+          }
+        }
+      }
+    },
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e104",
+      "type": "Location",
+      "title": "Crack polygon in photograph",
+      "assetId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e101",
+      "locationType": {
+        "code": "image-location",
+        "label": "Image location"
+      },
+      "image": {
+        "evidenceId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e106",
+        "sourceWidth": 4032,
+        "sourceHeight": 3024,
+        "coordinateOrigin": "top-left",
+        "geometry": {
+          "type": "Polygon",
+          "points": [
+            {
+              "x": 0.42,
+              "y": 0.31
+            },
+            {
+              "x": 0.48,
+              "y": 0.34
+            },
+            {
+              "x": 0.52,
+              "y": 0.56
+            },
+            {
+              "x": 0.45,
+              "y": 0.53
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "inspectionPrograms": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e107",
+      "type": "InspectionProgram",
+      "title": "Annual facade condition program",
+      "assetIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e101"
+      ],
+      "profileIds": [
+        "urn:oids:profile:facade-envelope:0.1.0"
+      ],
+      "programType": {
+        "code": "owner-maintenance",
+        "label": "Owner maintenance program"
+      },
+      "effectiveFrom": "2026-01-01"
+    }
+  ],
+  "inspectionEvents": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e108",
+      "type": "InspectionEvent",
+      "title": "July 2026 facade inspection",
+      "assetIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e101"
+      ],
+      "programId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e107",
+      "profileIds": [
+        "urn:oids:profile:facade-envelope:0.1.0"
+      ],
+      "inspectionType": {
+        "standardId": "urn:oids:term:inspection:facade-envelope",
+        "code": "facade-envelope",
+        "label": "Facade and building envelope inspection"
+      },
+      "status": {
+        "code": "completed",
+        "label": "Completed"
+      },
+      "startedAt": "2026-07-30T09:00:00-04:00",
+      "completedAt": "2026-07-30T12:30:00-04:00",
+      "participantIds": [
+        "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e02",
+        "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e03"
+      ],
+      "locationIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e102"
+      ],
+      "scope": "Visual inspection of accessible exterior elevations."
+    }
+  ],
+  "evidence": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e105",
+      "type": "Evidence",
+      "title": "North elevation drawing",
+      "evidenceType": {
+        "code": "drawing",
+        "label": "Drawing"
+      },
+      "contentType": "application/pdf",
+      "packagePath": "evidence/A-201-rev2.pdf",
+      "originalFilename": "A-201-rev2.pdf",
+      "checksum": {
+        "algorithm": "sha256",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e106",
+      "type": "Evidence",
+      "title": "North elevation crack photograph",
+      "evidenceType": {
+        "code": "photograph",
+        "label": "Photograph"
+      },
+      "contentType": "image/jpeg",
+      "packagePath": "evidence/IMG_0101.jpg",
+      "capturedAt": "2026-07-30T10:12:00-04:00",
+      "capturedBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "originalFilename": "IMG_0101.jpg",
+      "sizeBytes": 2845120,
+      "width": 4032,
+      "height": 3024,
+      "checksum": {
+        "algorithm": "sha256",
+        "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
+  ],
+  "observations": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e109",
+      "type": "Observation",
+      "title": "North elevation Level 4 inspection stamp",
+      "inspectionEventId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e108",
+      "observationType": {
+        "code": "annotation-group",
+        "label": "Annotation group"
+      },
+      "observedAt": "2026-07-30T10:12:00-04:00",
+      "authorship": {
+        "actor": {
+          "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+          "type": "Actor"
+        },
+        "authoredAt": "2026-07-30T10:12:00-04:00",
+        "method": "human"
+      },
+      "locationIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e103"
+      ]
+    },
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e110",
+      "type": "Observation",
+      "title": "Visible stair-step crack",
+      "description": "A diagonal stair-step crack is visible through mortar joints near the Level 4 window opening.",
+      "parentId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e109",
+      "inspectionEventId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e108",
+      "observationType": {
+        "standardId": "urn:oids:term:observation:visible-condition",
+        "code": "visible-condition",
+        "label": "Visible condition"
+      },
+      "observedAt": "2026-07-30T10:12:00-04:00",
+      "authorship": {
+        "actor": {
+          "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+          "type": "Actor"
+        },
+        "authoredAt": "2026-07-30T10:12:00-04:00",
+        "method": "human"
+      },
+      "locationIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e103",
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e104"
+      ],
+      "evidenceIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e106"
+      ],
+      "measuredValues": [
+        {
+          "property": {
+            "code": "estimated-length",
+            "label": "Estimated crack length"
+          },
+          "quantity": {
+            "value": 1.2,
+            "unit": "m",
+            "qualifier": {
+              "code": "estimated",
+              "label": "Estimated"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e111",
+      "type": "Finding",
+      "title": "Masonry stair-step cracking",
+      "description": "Pattern classified as masonry stair-step cracking. Cause is not determined by this record.",
+      "inspectionEventId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e108",
+      "observationIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e110"
+      ],
+      "findingType": {
+        "standardId": "urn:oids:term:finding:masonry-cracking",
+        "code": "masonry-cracking",
+        "label": "Masonry cracking"
+      },
+      "condition": {
+        "standardId": "urn:oids:term:finding:masonry-cracking",
+        "code": "masonry-cracking",
+        "label": "Masonry cracking",
+        "sourceSystem": "example-ai",
+        "sourceValue": "STEP_CRACK"
+      },
+      "component": {
+        "standardId": "urn:oids:term:component:exterior-wall",
+        "code": "exterior-wall",
+        "label": "Exterior wall"
+      },
+      "material": {
+        "standardId": "urn:oids:term:material:brick-masonry",
+        "code": "brick-masonry",
+        "label": "Brick masonry"
+      },
+      "authorship": {
+        "actor": {
+          "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e02",
+          "type": "Actor"
+        },
+        "authoredAt": "2026-07-30T13:05:00-04:00",
+        "method": "ai",
+        "modelName": "Example Masonry Condition Model",
+        "modelVersion": "3.2",
+        "confidence": 0.91
+      },
+      "locationIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e103",
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e104"
+      ],
+      "evidenceIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e106"
+      ],
+      "severityDimensions": [
+        {
+          "dimension": {
+            "standardId": "urn:oids:term:severity:physical-condition",
+            "code": "physical-condition",
+            "label": "Physical condition severity"
+          },
+          "rating": {
+            "standardId": "urn:oids:term:rating:moderate",
+            "code": "moderate",
+            "label": "Moderate"
+          }
+        },
+        {
+          "dimension": {
+            "standardId": "urn:oids:term:severity:urgency",
+            "code": "urgency",
+            "label": "Urgency"
+          },
+          "rating": {
+            "standardId": "urn:oids:term:rating:moderate",
+            "code": "moderate",
+            "label": "Moderate"
+          },
+          "rationale": "Professional review requested within 30 days."
+        }
+      ],
+      "confidence": 0.91,
+      "review": {
+        "state": {
+          "standardId": "urn:oids:term:review:human-reviewed",
+          "code": "human-reviewed",
+          "label": "Human reviewed"
+        },
+        "reviewedBy": [
+          {
+            "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e03",
+            "type": "Actor"
+          }
+        ],
+        "reviewedAt": "2026-07-30T15:00:00-04:00",
+        "comment": "Classification accepted; causation remains undetermined."
+      }
+    }
+  ],
+  "issues": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e112",
+      "type": "Issue",
+      "title": "Evaluate masonry cracking",
+      "description": "Review crack history and determine whether monitoring, probes, or repair design is appropriate.",
+      "inspectionEventId": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e108",
+      "findingIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e111"
+      ],
+      "issueType": {
+        "standardId": "urn:oids:term:issue:professional-review",
+        "code": "professional-review",
+        "label": "Professional review required"
+      },
+      "status": {
+        "standardId": "urn:oids:term:issue-status:open",
+        "code": "open",
+        "label": "Open"
+      },
+      "priority": {
+        "code": "normal",
+        "label": "Normal"
+      },
+      "assignedToIds": [
+        "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e03"
+      ],
+      "requestedById": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+      "dueAt": "2026-08-29T17:00:00-04:00",
+      "locationIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e103",
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e104"
+      ],
+      "evidenceIds": [
+        "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e106"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e113",
+      "type": "Relationship",
+      "title": "Observation supports finding",
+      "relationshipType": {
+        "standardId": "urn:oids:term:relationship:supports",
+        "code": "supports",
+        "label": "Supports"
+      },
+      "source": {
+        "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e110",
+        "type": "Observation"
+      },
+      "target": {
+        "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e111",
+        "type": "Finding"
+      }
+    },
+    {
+      "schemaVersion": "0.1.0",
+      "createdAt": "2026-07-30T14:10:00-04:00",
+      "createdBy": {
+        "id": "urn:uuid:2f8aa5f6-02af-4b36-a2d1-0d8338e00e01",
+        "type": "Actor"
+      },
+      "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e114",
+      "type": "Relationship",
+      "title": "Finding generates issue",
+      "relationshipType": {
+        "standardId": "urn:oids:term:relationship:generates",
+        "code": "generates",
+        "label": "Generates"
+      },
+      "source": {
+        "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e111",
+        "type": "Finding"
+      },
+      "target": {
+        "id": "urn:uuid:fa54c9df-0fd7-4f0c-a406-6de5fc75e112",
+        "type": "Issue"
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:evidence:0.1.0",
+  "title": "OIDS Evidence",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Evidence"
+        },
+        "evidenceType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "packagePath": {
+          "type": "string"
+        },
+        "embeddedContent": {
+          "type": "string",
+          "contentEncoding": "base64"
+        },
+        "checksum": {
+          "type": "object",
+          "properties": {
+            "algorithm": {
+              "enum": [
+                "sha256",
+                "sha384",
+                "sha512"
+              ]
+            },
+            "value": {
+              "type": "string",
+              "minLength": 32
+            }
+          },
+          "required": [
+            "algorithm",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        "capturedAt": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+        },
+        "capturedBy": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/ActorReference"
+        },
+        "deviceId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "originalFilename": {
+          "type": "string"
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "durationSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "accessClassification": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "purpose": {
+                "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+              },
+              "uri": {
+                "type": "string",
+                "format": "uri-reference"
+              },
+              "packagePath": {
+                "type": "string"
+              },
+              "contentType": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "purpose"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "uri"
+                ]
+              },
+              {
+                "required": [
+                  "packagePath"
+                ]
+              }
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "evidenceType",
+        "contentType"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "uri"
+          ]
+        },
+        {
+          "required": [
+            "packagePath"
+          ]
+        },
+        {
+          "required": [
+            "embeddedContent"
+          ]
+        }
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

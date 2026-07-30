@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:issue:0.1.0",
+  "title": "OIDS Issue",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Issue"
+        },
+        "inspectionEventId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "findingIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "issueType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "status": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "priority": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "assignedToIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "requestedById": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "dueAt": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+        },
+        "locationIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "resolution": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+            },
+            "resolvedAt": {
+              "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+            },
+            "resolvedBy": {
+              "$ref": "urn:oids:schema:common:0.1.0#/$defs/ActorReference"
+            },
+            "description": {
+              "type": "string"
+            },
+            "verificationFindingIds": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+              }
+            }
+          },
+          "required": [
+            "status"
+          ],
+          "additionalProperties": false
+        },
+        "review": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Review"
+        }
+      },
+      "required": [
+        "type",
+        "issueType",
+        "status"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

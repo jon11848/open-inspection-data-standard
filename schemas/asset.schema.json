@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:asset:0.1.0",
+  "title": "OIDS Asset",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Asset"
+        },
+        "assetType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "ownerIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          }
+        },
+        "primaryLocationId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "locationIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "commissionedDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "retiredDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "type",
+        "assetType"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

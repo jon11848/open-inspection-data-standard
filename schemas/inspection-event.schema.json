@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:inspection-event:0.1.0",
+  "title": "OIDS InspectionEvent",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "InspectionEvent"
+        },
+        "assetIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "programId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "profileIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "inspectionType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "status": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "startedAt": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+        },
+        "completedAt": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+        },
+        "participantIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "locationIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "scope": {
+          "type": "string"
+        },
+        "weather": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "type",
+        "assetIds",
+        "inspectionType",
+        "startedAt"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

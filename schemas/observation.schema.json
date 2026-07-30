@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:observation:0.1.0",
+  "title": "OIDS Observation",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Observation"
+        },
+        "inspectionEventId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "observationType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "observedAt": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+        },
+        "authorship": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Authorship"
+        },
+        "locationIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "measuredValues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "property": {
+                "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+              },
+              "quantity": {
+                "$ref": "urn:oids:schema:common:0.1.0#/$defs/Quantity"
+              },
+              "textValue": {
+                "type": "string"
+              },
+              "booleanValue": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "property"
+            ],
+            "oneOf": [
+              {
+                "required": [
+                  "quantity"
+                ]
+              },
+              {
+                "required": [
+                  "textValue"
+                ]
+              },
+              {
+                "required": [
+                  "booleanValue"
+                ]
+              }
+            ],
+            "additionalProperties": false
+          }
+        },
+        "review": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Review"
+        }
+      },
+      "required": [
+        "type",
+        "inspectionEventId",
+        "observationType",
+        "observedAt",
+        "authorship"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

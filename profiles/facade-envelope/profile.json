@@ -1,0 +1,57 @@
+{
+  "id": "urn:oids:profile:facade-envelope:0.1.0",
+  "type": "InspectionProfile",
+  "schemaVersion": "0.1.0",
+  "title": "Facade and Building Envelope Inspection Profile",
+  "description": "Starter profile for visual and instrument-assisted inspection of facade and envelope conditions.",
+  "createdAt": "2026-07-30T18:00:00Z",
+  "createdBy": {
+    "id": "urn:oids:actor:founding-steward",
+    "type": "Actor"
+  },
+  "profileVersion": "0.1.0",
+  "inspectionTypes": [
+    {
+      "standardId": "urn:oids:term:inspection:facade-envelope",
+      "code": "facade-envelope",
+      "label": "Facade and building envelope inspection"
+    }
+  ],
+  "appliesToAssetTypes": [
+    {
+      "standardId": "urn:oids:term:asset:building",
+      "code": "building",
+      "label": "Building"
+    }
+  ],
+  "requiredJsonPointers": [
+    "/InspectionEvent/assetIds",
+    "/Observation/inspectionEventId",
+    "/Finding/inspectionEventId"
+  ],
+  "recommendedJsonPointers": [
+    "/Observation/locationIds",
+    "/Observation/evidenceIds",
+    "/Finding/condition",
+    "/Finding/component",
+    "/Finding/material",
+    "/Finding/severityDimensions"
+  ],
+  "taxonomyUris": [
+    "urn:oids:taxonomy:core:0.1.0",
+    "urn:oids:taxonomy:facade-envelope:0.1.0"
+  ],
+  "permittedRelationshipCodes": [
+    "supports",
+    "generates",
+    "addresses",
+    "related-to",
+    "supersedes"
+  ],
+  "validationRules": [
+    "Drawing and image coordinates should use normalized values from 0 through 1.",
+    "A finding should reference at least one observation unless it documents a desk-review or professional conclusion whose basis is described.",
+    "Evidence expected to support an auditable inspection record should include a checksum."
+  ],
+  "status": "draft"
+}

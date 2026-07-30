@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:profile:0.1.0",
+  "title": "OIDS InspectionProfile",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "InspectionProfile"
+        },
+        "profileVersion": {
+          "type": "string"
+        },
+        "inspectionTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+          }
+        },
+        "appliesToAssetTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+          }
+        },
+        "requiredJsonPointers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^/"
+          }
+        },
+        "recommendedJsonPointers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^/"
+          }
+        },
+        "taxonomyUris": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        },
+        "permittedRelationshipCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "candidate",
+            "stable",
+            "deprecated"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "profileVersion",
+        "inspectionTypes",
+        "status"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

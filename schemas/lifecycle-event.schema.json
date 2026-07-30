@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:lifecycle-event:0.1.0",
+  "title": "OIDS CloudEvents-compatible Lifecycle Event",
+  "type": "object",
+  "properties": {
+    "specversion": {
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "type": {
+      "type": "string",
+      "pattern": "^org\\.openinspection\\."
+    },
+    "subject": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "datacontenttype": {
+      "const": "application/json"
+    },
+    "dataschema": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/EntityReference"
+        },
+        "previousVersion": {
+          "type": "string"
+        },
+        "currentVersion": {
+          "type": "string"
+        },
+        "changedFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actor": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/ActorReference"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "entity"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "specversion",
+    "id",
+    "source",
+    "type",
+    "time",
+    "datacontenttype",
+    "data"
+  ],
+  "additionalProperties": true
+}

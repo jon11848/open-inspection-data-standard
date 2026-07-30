@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:finding:0.1.0",
+  "title": "OIDS Finding",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Finding"
+        },
+        "inspectionEventId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        },
+        "observationIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "findingType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "condition": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "component": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "material": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "authorship": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Authorship"
+        },
+        "locationIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "severityDimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "dimension": {
+                "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+              },
+              "rating": {
+                "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+              },
+              "numericValue": {
+                "type": "number"
+              },
+              "rationale": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "dimension"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "rating"
+                ]
+              },
+              {
+                "required": [
+                  "numericValue"
+                ]
+              }
+            ],
+            "additionalProperties": false
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "review": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Review"
+        },
+        "supersedesId": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+        }
+      },
+      "required": [
+        "type",
+        "inspectionEventId",
+        "findingType",
+        "authorship"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

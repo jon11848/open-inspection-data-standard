@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:inspection-program:0.1.0",
+  "title": "OIDS InspectionProgram",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "InspectionProgram"
+        },
+        "assetIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "profileIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:oids:schema:common:0.1.0#/$defs/Identifier"
+          },
+          "uniqueItems": true
+        },
+        "programType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "authorityReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "effectiveFrom": {
+          "type": "string",
+          "format": "date"
+        },
+        "effectiveUntil": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "required": [
+        "type",
+        "assetIds"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}

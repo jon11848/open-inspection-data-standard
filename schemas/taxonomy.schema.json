@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:taxonomy:0.1.0",
+  "title": "OIDS Taxonomy Registry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uri-reference"
+    },
+    "title": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "candidate",
+        "stable",
+        "deprecated"
+      ]
+    },
+    "terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "standardId": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "code": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "broaderId": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deprecated": {
+            "type": "boolean"
+          },
+          "replacedBy": {
+            "type": "string",
+            "format": "uri-reference"
+          }
+        },
+        "required": [
+          "standardId",
+          "code",
+          "label"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "version",
+    "status",
+    "terms"
+  ],
+  "additionalProperties": false
+}

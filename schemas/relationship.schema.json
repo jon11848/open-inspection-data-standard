@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:oids:schema:relationship:0.1.0",
+  "title": "OIDS Relationship",
+  "allOf": [
+    {
+      "$ref": "urn:oids:schema:common:0.1.0#/$defs/BaseEntity"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "Relationship"
+        },
+        "relationshipType": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/VocabularyTerm"
+        },
+        "source": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/EntityReference"
+        },
+        "target": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/EntityReference"
+        },
+        "effectiveAt": {
+          "$ref": "urn:oids:schema:common:0.1.0#/$defs/Timestamp"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "type",
+        "relationshipType",
+        "source",
+        "target"
+      ]
+    }
+  ],
+  "unevaluatedProperties": false
+}
